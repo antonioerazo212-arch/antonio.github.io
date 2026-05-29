@@ -1,4 +1,29 @@
+title: Antonio Erazo
+description: Java Backend Engineer | Spring Boot | Kafka | AWS SQS | Microservices
 
-theme: jekyll-theme-minimal
-title: Octocat's homepage
-description: Bookmark this to keep an eye on my project updates!
+theme: minima
+
+author:
+  name: Antonio Erazo
+  email: antonio.erazo212@gmail.com
+
+social_links:
+  github: antonioerazo
+  linkedin: antonio-erazo-7b5098111
+
+show_excerpts: true
+
+header_pages:
+  - projects.md
+  - experience.md
+  - about.md
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+markdown: kramdown
+
+lang: es
+
+timezone: America/Argentina/Jujuy
