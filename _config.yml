@@ -1,29 +1,266 @@
-title: Antonio Erazo
-description: Java Backend Engineer | Spring Boot | Kafka | AWS SQS | Microservices
+# =============================================
+# _config.yml — Portfolio de Antonio Erazo
+# Java Backend Semi Senior
+# =============================================
 
+# --- Información del sitio ---
+title: "Antonio Erazo"
+subtitle: "Java Backend Semi Senior · Microservicios · Spring Boot"
+description: >
+  Desarrollador Backend Java con 7 años de experiencia en sistemas escalables,
+  microservicios, mensajería con Kafka y Amazon SQS, y arquitecturas de alta disponibilidad.
+author: "Antonio Erazo"
+email: antonio.erazo212@gmail.com
+phone: "+54 9 388 435-9658"
+location: "San Salvador de Jujuy, Argentina"
+linkedin: "https://www.linkedin.com/in/antonio-erazo-7b5098111/"
+github: ""  # Agregar si tenés cuenta
+
+# --- URL del sitio (ajustar según GitHub Pages u otro hosting) ---
+url: "https://antonio-erazo.github.io"
+baseurl: ""
+
+# --- Build settings ---
 theme: minima
-
-author:
-  name: Antonio Erazo
-  email: antonio.erazo212@gmail.com
-
-social_links:
-  github: antonioerazo
-  linkedin: antonio-erazo-7b5098111
-
-show_excerpts: true
-
-header_pages:
-  - projects.md
-  - experience.md
-  - about.md
-
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-
 markdown: kramdown
+highlighter: rouge
+permalink: pretty
 
+# --- Plugins ---
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# --- SEO ---
 lang: es
-
 timezone: America/Argentina/Jujuy
+
+# --- Keywords para motores de búsqueda ---
+keywords:
+  - Java Backend Developer
+  - Spring Boot
+  - Microservicios
+  - Kafka
+  - Amazon SQS
+  - API REST
+  - Software Engineer Argentina
+  - Semi Senior Java
+
+# --- Navegación ---
+navigation:
+  - title: "Inicio"
+    url: "/"
+  - title: "Experiencia"
+    url: "/#experiencia"
+  - title: "Habilidades"
+    url: "/#habilidades"
+  - title: "Educación"
+    url: "/#educacion"
+  - title: "Contacto"
+    url: "/#contacto"
+
+# --- Perfil profesional ---
+profile:
+  years_experience: 7
+  level: "Semi Senior"
+  stack_principal: "Java · Spring Boot · Microservicios"
+  idiomas:
+    - nombre: "Español"
+      nivel: "Nativo"
+    - nombre: "Inglés"
+      nivel: "Intermedio"
+
+# --- Habilidades técnicas ---
+skills:
+  backend:
+    - nombre: "Java"
+      nivel: 95
+      years: 7
+    - nombre: "Spring Boot"
+      nivel: 90
+      years: 6
+    - nombre: "Spring Data JPA"
+      nivel: 85
+      years: 5
+    - nombre: "APIs REST"
+      nivel: 90
+      years: 6
+    - nombre: "Arquitectura de Microservicios"
+      nivel: 85
+      years: 5
+
+  mensajeria:
+    - nombre: "Apache Kafka"
+      nivel: 80
+      years: 4
+    - nombre: "Amazon SQS (AWS)"
+      nivel: 80
+      years: 3
+    - nombre: "RabbitMQ"
+      nivel: 70
+      years: 2
+
+  bases_de_datos:
+    - nombre: "MySQL"
+      nivel: 85
+      years: 6
+    - nombre: "SQL / Consultas complejas"
+      nivel: 85
+      years: 6
+    - nombre: "Modelado de datos"
+      nivel: 80
+      years: 5
+
+  observabilidad:
+    - nombre: "Grafana"
+      nivel: 75
+      years: 3
+    - nombre: "Loki"
+      nivel: 70
+      years: 3
+    - nombre: "New Relic"
+      nivel: 70
+      years: 2
+
+  testing:
+    - nombre: "JUnit"
+      nivel: 85
+      years: 5
+    - nombre: "Mockito"
+      nivel: 80
+      years: 5
+    - nombre: "Tests de Integración"
+      nivel: 80
+      years: 4
+
+  herramientas:
+    - nombre: "Git"
+      nivel: 90
+      years: 7
+    - nombre: "Docker"
+      nivel: 70
+      years: 3
+    - nombre: "Jenkins"
+      nivel: 65
+      years: 2
+    - nombre: "GCP"
+      nivel: 65
+      years: 2
+    - nombre: "Scrum / Kanban"
+      nivel: 85
+      years: 6
+
+# --- Experiencia laboral ---
+experience:
+  - empresa: "Navent | QuintoAndar Group"
+    rol: "Software Engineer I — Backend Java"
+    periodo: "Dic 2022 – Ene 2026"
+    duracion: "3 años"
+    proyecto: "ForRent / Partner Payments"
+    equipo: "SXPI"
+    descripcion: >
+      Desarrollo de servicios backend en arquitectura hexagonal con Java y Spring Boot.
+      Diseño de APIs REST escalables, integración con MySQL, flujos asíncronos con Amazon SQS
+      y Apache Kafka. Monitoreo con Grafana y Loki. Trabajo ágil en equipo multidisciplinario.
+    logros:
+      - "Arquitectura hexagonal aplicada a un sistema de pagos productivo de alta disponibilidad"
+      - "Implementación de flujos asíncronos con Amazon SQS y Kafka para procesamiento de eventos"
+    tech:
+      - Java
+      - Spring Boot
+      - Gradle
+      - MySQL
+      - Amazon SQS
+      - Apache Kafka
+      - Grafana
+      - Loki
+      - Arquitectura Hexagonal
+
+  - empresa: "Navent | QuintoAndar Group"
+    rol: "Software Engineer I — Backend Java"
+    periodo: "Nov 2021 – Dic 2022"
+    duracion: "1 año"
+    proyecto: "Clasificados"
+    equipo: "Perfiles de Usuario"
+    descripcion: >
+      Desarrollo de BFFs con Java y Spring Boot. APIs REST, flujos asíncronos con Kafka,
+      tests de integración, despliegue en GCP con Jenkins. Monitoreo con New Relic.
+    logros:
+      - "Reducción significativa de incidencias en JIRA relacionadas con errores en perfiles de usuario"
+      - "Despliegue y mantenimiento de servicios en GCP con integración continua via Jenkins"
+    tech:
+      - Java
+      - Spring Boot
+      - Apache Kafka
+      - SQL
+      - New Relic
+      - GCP
+      - Jenkins
+      - React
+
+  - empresa: "Blimop"
+    rol: "Desarrollador Backend / Software Engineer"
+    periodo: "May 2021 – Nov 2021"
+    duracion: "6 meses"
+    proyecto: "Veritran — Bantrab"
+    descripcion: >
+      Desarrollo de funcionalidades para aplicación online bancaria. Implementación de
+      componentes interactivos y documentación de procesos.
+    logros:
+      - "Implementación de componentes drag & drop para flujos bancarios"
+    tech:
+      - JavaScript
+      - SQL Developer
+      - SoapUI
+      - Postman
+
+  - empresa: "Blimop"
+    rol: "Desarrollador Backend"
+    periodo: "Ene 2021 – May 2021"
+    duracion: "4 meses"
+    proyecto: "Ortiz Maderas"
+    descripcion: >
+      Desarrollo y mantenimiento de reportes. Análisis de datos y consultas SQL complejas.
+    tech:
+      - Spring Boot
+      - JasperReports
+      - Jaspersoft Studio
+      - MySQL
+      - HeidiSQL
+
+  - empresa: "Blimop"
+    rol: "Desarrollador Backend"
+    periodo: "Feb 2019 – Dic 2020"
+    duracion: "1 año 10 meses"
+    proyecto: "Choffi / Beplic"
+    descripcion: >
+      Reingeniería de proyecto con arquitectura de microservicios. Mensajería en tiempo real
+      con RabbitMQ y WebSockets. Containerización con Docker.
+    tech:
+      - JHipster
+      - Spring Boot
+      - RabbitMQ
+      - WebSockets
+      - Docker
+      - GitLab
+      - MySQL
+
+# --- Educación ---
+education:
+  - titulo: "Analista Programador Universitario"
+    institucion: "Facultad de Ingeniería — Universidad Nacional de Jujuy"
+    periodo: "2008 – 2016"
+
+certifications:
+  - nombre: "Spring Boot, Angular y Metodologías Ágiles (Scrum)"
+    entidad: "Softlogia S.R.L"
+    año: 2018
+
+# --- Excluir archivos del build ---
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md

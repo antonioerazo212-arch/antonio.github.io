@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Antonio Erazo — Java Backend Semi Senior</title>
+  <meta name="description" content="Desarrollador Backend Java con 7 años de experiencia en sistemas escalables, microservicios, Spring Boot, Kafka y Amazon SQS." />
+  <meta name="keywords" content="Java Backend Developer, Spring Boot, Microservicios, Kafka, Amazon SQS, API REST, Argentina" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --accent: #00d4aa;
+      --accent2: #3b82f6;
+      --warn: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: #1e293b;
+      --font-head: 'Syne', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── GRID NOISE BACKGROUND ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,212,170,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,212,170,.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 3rem;
+      background: rgba(10,14,23,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--accent);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 3rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-content { max-width: 680px; }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: .3rem .8rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .6s ease both;
+    }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      color: #fff;
+      animation: fadeUp .6s .1s ease both;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      animation: fadeUp .6s .2s ease both;
+    }
+
+    .hero-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 2rem;
+      animation: fadeUp .6s .3s ease both;
+    }
+
+    .badge {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--accent2);
+      padding: .3rem .8rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      letter-spacing: .5px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      animation: fadeUp .6s .4s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .75rem 1.6rem;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: .5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all .2s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0e17;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover { background: #00f0c4; transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* Stat strip */
+    .stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      animation: fadeUp .6s .5s ease both;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 3rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -1px;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── TIMELINE EXPERIENCE ─── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.42rem;
+      top: 8px;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(0,212,170,.15);
+    }
+
+    .timeline-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .5rem;
+    }
+
+    .timeline-role {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .timeline-company {
+      font-size: 0.8rem;
+      color: var(--accent2);
+    }
+
+    .timeline-period {
+      margin-left: auto;
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+
+    .timeline-project {
+      font-size: 0.72rem;
+      color: var(--warn);
+      margin-bottom: .6rem;
+      letter-spacing: .5px;
+    }
+
+    .timeline-desc {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.8;
+      margin-bottom: .8rem;
+    }
+
+    .timeline-logros {
+      list-style: none;
+      margin-bottom: .8rem;
+    }
+
+    .timeline-logros li {
+      font-size: 0.8rem;
+      color: var(--text);
+      padding-left: 1rem;
+      position: relative;
+      margin-bottom: .3rem;
+    }
+
+    .timeline-logros li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .tech-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: .2rem .6rem;
+      border-radius: 3px;
+      font-size: 0.68rem;
+      letter-spacing: .5px;
+    }
+
+    /* ─── SKILLS GRID ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skills-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .skills-card-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      color: var(--accent2);
+      font-size: .85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-bar-item {
+      margin-bottom: 1rem;
+    }
+
+    .skill-bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text);
+      margin-bottom: .35rem;
+    }
+
+    .skill-bar-label span:last-child { color: var(--muted); }
+
+    .skill-bar-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1s cubic-bezier(.4,0,.2,1);
+    }
+
+    .skill-bar-fill.animated { transform: scaleX(1); }
+
+    /* ─── EDUCATION ─── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+
+    .edu-titulo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .edu-inst {
+      color: var(--accent2);
+      font-size: .8rem;
+      margin-top: .3rem;
+    }
+
+    .edu-period {
+      color: var(--muted);
+      font-size: .72rem;
+      margin-top: .2rem;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color .2s;
+    }
+
+    .contact-item:hover { border-color: var(--accent); }
+
+    .contact-icon { font-size: 1.3rem; }
+
+    .contact-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      font-size: 0.82rem;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .contact-item a { color: inherit; text-decoration: none; }
+    .contact-item a:hover { color: var(--accent); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .stats { gap: 1.5rem; flex-wrap: wrap; }
+      .timeline-period { margin-left: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <span class="nav-logo">AE/</span>
+  <ul class="nav-links">
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#habilidades">Habilidades</a></li>
+    <li><a href="#educacion">Educación</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-content">
+    <span class="hero-tag">Disponible para nuevos proyectos</span>
+    <h1>Antonio<br/><span>Erazo</span></h1>
+    <p class="hero-sub">Java Backend Semi Senior · 7 años construyendo servicios escalables, sistemas distribuidos y arquitecturas de misión crítica en entornos productivos.</p>
+
+    <div class="hero-stack">
+      <span class="badge">Java</span>
+      <span class="badge">Spring Boot</span>
+      <span class="badge">Microservicios</span>
+      <span class="badge">Apache Kafka</span>
+      <span class="badge">Amazon SQS</span>
+      <span class="badge">Arq. Hexagonal</span>
+      <span class="badge">SQL</span>
+      <span class="badge">Grafana</span>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:antonio.erazo212@gmail.com">✉ Contactar</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/antonio-erazo-7b5098111/" target="_blank">LinkedIn →</a>
+    </div>
+
+    <div class="stats">
+      <div>
+        <div class="stat-num">7</div>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+      <div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Proyectos productivos</div>
+      </div>
+      <div>
+        <div class="stat-num">3</div>
+        <div class="stat-label">Empresas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── EXPERIENCIA ─── -->
+<section id="experiencia">
+  <div class="section-label">// historial laboral</div>
+  <div class="section-title">Experiencia</div>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Software Engineer I — Backend Java</span>
+        <span class="timeline-company">Navent | QuintoAndar Group</span>
+        <span class="timeline-period">Dic 2022 – Ene 2026 · 3 años</span>
+      </div>
+      <div class="timeline-project">▸ Proyecto: ForRent / Partner Payments — Equipo: SXPI</div>
+      <p class="timeline-desc">Desarrollo en arquitectura hexagonal con Java y Spring Boot. Diseño de APIs REST escalables, integración con MySQL, flujos asíncronos con Amazon SQS y Apache Kafka. Observabilidad con Grafana y Loki en entorno de alta disponibilidad.</p>
+      <ul class="timeline-logros">
+        <li>Implementación de arquitectura hexagonal en sistema de pagos productivo de alta disponibilidad</li>
+        <li>Flujos asíncronos con Amazon SQS y Kafka para procesamiento de eventos a escala</li>
+      </ul>
+      <div class="tech-row">
+        <span class="tech-pill">Java</span><span class="tech-pill">Spring Boot</span><span class="tech-pill">Gradle</span>
+        <span class="tech-pill">MySQL</span><span class="tech-pill">Amazon SQS</span><span class="tech-pill">Apache Kafka</span>
+        <span class="tech-pill">Grafana</span><span class="tech-pill">Loki</span><span class="tech-pill">Arq. Hexagonal</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Software Engineer I — Backend Java</span>
+        <span class="timeline-company">Navent | QuintoAndar Group</span>
+        <span class="timeline-period">Nov 2021 – Dic 2022 · 1 año</span>
+      </div>
+      <div class="timeline-project">▸ Proyecto: Clasificados — Equipo: Perfiles de Usuario</div>
+      <p class="timeline-desc">Desarrollo de BFFs con Java y Spring Boot. APIs REST, mensajería asíncrona con Kafka, tests de integración y despliegue continuo en GCP via Jenkins. Monitoreo con New Relic.</p>
+      <ul class="timeline-logros">
+        <li>Reducción significativa de incidencias en JIRA relacionadas con errores en perfiles de usuario</li>
+        <li>Pipeline CI/CD con Jenkins para despliegue en GCP</li>
+      </ul>
+      <div class="tech-row">
+        <span class="tech-pill">Java</span><span class="tech-pill">Spring Boot</span><span class="tech-pill">Apache Kafka</span>
+        <span class="tech-pill">SQL</span><span class="tech-pill">New Relic</span><span class="tech-pill">GCP</span>
+        <span class="tech-pill">Jenkins</span><span class="tech-pill">React</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <span class="timeline-role">Desarrollador Backend</span>
+        <span class="timeline-company">Blimop</span>
+        <span class="timeline-period">Feb 2019 – Nov 2021 · 2 años 9 meses</span>
+      </div>
+      <div class="timeline-project">▸ Proyectos: Veritran / Ortiz Maderas / Choffi / Beplic</div>
+      <p class="timeline-desc">Reingeniería con arquitectura de microservicios y mensajería en tiempo real con RabbitMQ y WebSockets. Containerización con Docker. Desarrollo de reportes con JasperReports y funcionalidades para aplicaciones bancarias.</p>
+      <div class="tech-row">
+        <span class="tech-pill">Spring Boot</span><span class="tech-pill">JHipster</span><span class="tech-pill">RabbitMQ</span>
+        <span class="tech-pill">WebSockets</span><span class="tech-pill">Docker</span><span class="tech-pill">MySQL</span>
+        <span class="tech-pill">JasperReports</span><span class="tech-pill">JavaScript</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── HABILIDADES ─── -->
+<section id="habilidades">
+  <div class="section-label">// stack técnico</div>
+  <div class="section-title">Habilidades</div>
+
+  <div class="skills-grid">
+
+    <div class="skills-card">
+      <div class="skills-card-title">Backend & Lenguajes</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Java</span><span>7 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="95"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Spring Boot</span><span>6 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Spring Data JPA</span><span>5 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>APIs REST</span><span>6 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Microservicios</span><span>5 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+    </div>
+
+    <div class="skills-card">
+      <div class="skills-card-title">Mensajería & Event Driven</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Apache Kafka</span><span>4 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Amazon SQS</span><span>3 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>RabbitMQ</span><span>2 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="70"></div></div>
+      </div>
+      <div class="skill-bar-title" style="margin-top:1.2rem;font-family:var(--font-head);font-weight:700;color:var(--accent2);font-size:.85rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:1rem;">Bases de datos</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>MySQL / SQL</span><span>6 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Modelado de datos</span><span>5 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+    </div>
+
+    <div class="skills-card">
+      <div class="skills-card-title">Testing & Calidad</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>JUnit</span><span>5 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Mockito</span><span>5 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Tests de integración</span><span>4 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="80"></div></div>
+      </div>
+      <div class="skills-card-title" style="margin-top:1.2rem">Observabilidad</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Grafana / Loki</span><span>3 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="75"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>New Relic</span><span>2 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="70"></div></div>
+      </div>
+    </div>
+
+    <div class="skills-card">
+      <div class="skills-card-title">Herramientas & DevOps</div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Git</span><span>7 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="90"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Docker</span><span>3 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="70"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Jenkins / CI CD</span><span>2 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>GCP</span><span>2 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="65"></div></div>
+      </div>
+      <div class="skill-bar-item">
+        <div class="skill-bar-label"><span>Scrum / Kanban</span><span>6 años</span></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" data-w="85"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── EDUCACIÓN ─── -->
+<section id="educacion">
+  <div class="section-label">// formación académica</div>
+  <div class="section-title">Educación</div>
+
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-titulo">Analista Programador Universitario</div>
+      <div class="edu-inst">Facultad de Ingeniería — Universidad Nacional de Jujuy</div>
+      <div class="edu-period">2008 – 2016</div>
+    </div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-icon">📜</div>
+    <div>
+      <div class="edu-titulo">Spring Boot, Angular y Metodologías Ágiles</div>
+      <div class="edu-inst">Softlogia S.R.L — Certificación</div>
+      <div class="edu-period">2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACTO ─── -->
+<section id="contacto">
+  <div class="section-label">// hablemos</div>
+  <div class="section-title">Contacto</div>
+
+  <div class="contact-grid">
+    <div class="contact-item">
+      <span class="contact-icon">✉️</span>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:antonio.erazo212@gmail.com">antonio.erazo212@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">📞</span>
+      <div>
+        <div class="contact-label">Teléfono</div>
+        <div class="contact-value">+54 9 388 435-9658</div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">💼</span>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-value"><a href="https://www.linkedin.com/in/antonio-erazo-7b5098111/" target="_blank">antonio-erazo-7b5098111</a></div>
+      </div>
+    </div>
+    <div class="contact-item">
+      <span class="contact-icon">📍</span>
+      <div>
+        <div class="contact-label">Ubicación</div>
+        <div class="contact-value">San Salvador de Jujuy, Argentina</div>
+      </div>
+    </div>
+  </div>
+
+  <a class="btn btn-primary" href="mailto:antonio.erazo212@gmail.com">Enviar mensaje →</a>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  © 2025 Antonio Erazo · Java Backend Semi Senior · Jujuy, Argentina
+</footer>
+
+<script>
+  // Animate skill bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          const w = bar.dataset.w;
+          bar.style.width = w + '%';
+          bar.classList.add('animated');
+        });
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.skills-card').forEach(c => observer.observe(c));
+</script>
+</body>
+</html>
